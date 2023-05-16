@@ -1,0 +1,19 @@
+301K available
+Compiling NUMLET.PRG
+NUMLET.PRG(32) Error C2001  Syntax error: 'ARR_UNO'
+NUMLET.PRG(55) Error C2001  Syntax error: 'ARR_DOS'
+NUMLET.PRG(73) Error C2001  Syntax error: 'ARR_TRES'
+NUMLET.PRG(127)    Error C2001  Syntax error: 'ARR_DOS'
+NUMLET.PRG(156)    Error C2001  Syntax error: 'ARR_CUATRO'
+NUMLET.PRG(180)    Error C2001  Syntax error: 'ARR_CINCO'
+NUMLET.PRG(198)    Error C2001  Syntax error: 'ARR_SEIS'
+NUMLET.PRG(253)    Error C2001  Syntax error: 'ARR_CINCO'
+NUMLET.PRG(278)    Error C2001  Syntax error: 'ARR_SIETE'
+NUMLET.PRG(300)    Error C2001  Syntax error: 'ARR_OCHO'
+NUMLET.PRG(317)    Error C2001  Syntax error: 'ARR_NUEVE'
+NUMLET.PRG(365)    Error C2001  Syntax error: 'ARR_OCHO'
+NUMLET.PRG(394)    Error C2005  Statement not recognized, match failed at: '<end of line>'
+NUMLET.PRG(395)    Error C2001  Syntax error: ','
+14 errors                  
+                                   
+No code generated

@@ -1,0 +1,44 @@
+
+***************************************
+* VER.PRG                             *
+* Visualiza los elementos de un array *
+***************************************
+
+LOCAL nombres[5]
+CLEAR
+
+
+* Se deben llenar el array con algun tipo de dato para que
+* el clipper sepa se cual tipo de datos debe hacer el GET
+
+FOR x = 1 TO 5
+	nombres[x] := SPACE(10)
+NEXT
+
+
+* Ahora si se puede ejecutar el programa del libro
+
+FOR i = 1 TO 5
+	@ 12,25 SAY "Nombre: " GET nombres[i]
+	READ
+	@ 14,25 say i
+	@ 15,25 say nombres[i]
+   INKEY(0)
+NEXT
+
+
+* Para poder visualizar el array se tiene
+
+CLEAR
+@  5,30 SAY "Elementos del Array"
+fi := 7
+FOR i = 1 TO 5
+	@ fi++,25 SAY nombres[i]
+	IF fi = 22
+		@ fi++,30 SAY "Pulse una tecla ..."
+		INKEY(0)
+		@  7,25 CLEAR TO MAXROW(), MAXCOL()
+		fi := 7
+	ENDIF
+NEXT
+

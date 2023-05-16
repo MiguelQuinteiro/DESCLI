@@ -1,0 +1,16 @@
+301K available
+Compiling ARRAY23.PRG
+ARRAY23.PRG(6) Warning C1004  Ambiguous reference, assuming memvar: 'I'
+ARRAY23.PRG(7) Warning C1004  Ambiguous reference, assuming memvar: 'GETLIST'
+ARRAY23.PRG(8) Warning C1004  Ambiguous reference, assuming memvar: 'I'
+ARRAY23.PRG(8) Warning C1004  Ambiguous reference, assuming memvar: 'I'
+ARRAY23.PRG(8) Warning C1004  Ambiguous reference, assuming memvar: 'I'
+ARRAY23.PRG(8) Warning C1003  Ambiguous reference: 'I'
+ARRAY23.PRG(10)    Warning C1003  Ambiguous reference: 'GETLIST'
+ARRAY23.PRG(10)    Warning C1003  Ambiguous reference: 'I'
+ARRAY23.PRG(12)    Warning C1003  Ambiguous reference: 'GETLIST'
+ARRAY23.PRG(12)    Warning C1004  Ambiguous reference, assuming memvar: 'GETLIST'
+ARRAY23.PRG(15)    Warning C1003  Ambiguous reference: 'I'
+ARRAY23.PRG(16)    Warning C1003  Ambiguous reference: 'I'
+12 warnings                
+Code size 223, Symbols 160, Constants 33

@@ -1,0 +1,73 @@
+
+******************************************************
+* BAJAPERS.PRG                                       *
+* Programa para dar bajas de registros en el archivo *
+* PERSONAL.DBF                                       *
+******************************************************
+
+PRIVATE res := "S", sw := 0
+SET DATE BRITISH
+SET DELETED ON
+USE personal
+
+DO WHILE res = "S"
+	PRIVATE dn  := SPACE(8)
+	CLEAR
+	@  3,10 TO  5,70
+	@  4,30 SAY "DNI: " GET dn VALID dn > SPACE(8)
+	READ
+
+	* Buscar el registro a dar de baja
+	LOCATE FOR dni = dn
+	IF !FOUND()
+		@ 13,10 TO 15,70
+		@ 14,33 SAY "No esta"
+	ELSE
+		* Visualizar los datos del registro
+		@  7,10 TO 14,70
+		@  8,20 SAY "Nombre: " + nombre
+		@  9,20 SAY "Apellidos: " + apellido
+		@ 10,20 SAY "Direccion: " + direccion
+		@ 11,20 SAY "Provincia: "
+		lprovincia()
+		@ 12,20 SAY "Estado Civil: "
+		lestado()
+		@ 13,20 SAY "Fecha Ingreso (dd/mm/aa):"
+		@ 13,46 SAY fecha
+		@ 16,10 TO 18,70
+		res = SPACE(1)
+		@ 17,20 SAY "Desea darle de bajas (S/N): ";
+			GET res PICT "!" VALID res $ "SN"
+		READ
+		IF res = "S"
+			* Marcar el registro
+			sw = 1
+			DELETE
+		ENDIF
+	ENDIF
+	res = SPACE(1)
+	@ 20,10 TO 22,70
+	@ 21,30 SAY "Mas bajas (S/N): " ;
+		GET res PICT "!" VALID res $ "SN"
+	READ
+ENDDO
+IF sw = 1
+	* Si se a marcado algun registro empaquetar
+	PACK
+ENDIF
+SET DELETE OFF
+CLOSE DATABASE
+
+PROCEDURE lprovincia
+* Visualizar la provincia
+LOCAL xpro := { "Alava","Albacete","Alicante", ;
+	"Almeria","Avila" }
+@ 11,31 SAY xpro[provincia]
+RETURN
+
+PROCEDURE lestado
+* Visualizar el estado civil
+LOCAL x_es := { "Soltero","Casado","Viudo" }
+@ 12,34 SAY x_es[VAL(estado)]
+RETURN
+

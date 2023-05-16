@@ -1,0 +1,41 @@
+
+************
+* MENU.PRG *
+************
+
+SET MESSAGE TO 23 CENTER
+SET WRAP ON
+
+DO WHILE .T.
+
+	CLEAR
+	op := 1
+
+	@  8,31 TO 15,48
+	@ 22,20 TO 24,60
+	@  4,20 TO  6,60
+
+	@  5,33 SAY    "MENU PRINCIPAL"
+	@ 10,36 PROMPT "COMPRAS  " MESSAGE "Opcion de compras"
+	@ 11,36 PROMPT "VENTAS   " MESSAGE "Opcion de ventas"
+	@ 12,36 PROMPT "LISTADOS " MESSAGE "Listados en General"
+	@ 13,36 PROMPT "SALIR    " MESSAGE "Pulse INTRO o ESC"
+
+	MENU TO op
+
+	IF LASTKEY() = 27
+		EXIT
+	ENDIF
+
+	DO CASE
+		CASE op = 1
+			DO compras
+		CASE op = 2
+			DO ventas
+		CASE op = 3
+			DO listados
+		CASE op = 4
+			EXIT
+	ENDCASE
+ENDDO
+

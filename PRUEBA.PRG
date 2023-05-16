@@ -1,0 +1,28 @@
+
+************************************************
+* PRUEBA.PRG                                   *
+* Programa para probar la pantalla del clipper *
+************************************************
+
+SET TALK OFF
+CLEAR ALL
+CLOSE ALL
+
+
+
+PRIVATE filini := colini := filfin := colfil := 0
+
+
+filfin = MAXROW()
+colfin = MAXCOL()
+
+@  0, 0 CLEAR TO filfin,colfin
+
+FOR filini = 1 TO 20 STEP 2
+	colini = filini + 10
+	@ filini,colini TO filfin, colfin
+NEXT
+
+
+INKEY(0)
+

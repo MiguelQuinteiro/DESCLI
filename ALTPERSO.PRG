@@ -1,0 +1,115 @@
+
+******************************************************
+* ALTPERSO.PRG                                       *
+* Programa para dar altas de registros en el archivo *
+* PERSONAL.DBF                                       *
+******************************************************
+
+SET DATE BRITISH
+USE personal
+
+PRIVATE res := "S"
+
+DO WHILE res = "S"
+	PRIVATE dn  := SPACE(8), nom := SPACE(10)
+	PRIVATE ape := SPACE(20), dir := SPACE(30)
+	PRIVATE fe  := CTOD(SPACE(8)), cat := SPACE(1)
+	PUBLIC  op  := es := 0
+	CLEAR
+	@  3,10 TO  5,70
+	@  4,30 SAY "DNI: " GET dn VALID dn > SPACE(8)
+	READ
+	LOCATE FOR dni = dn
+	IF FOUND()
+		@ 13,10 TO 16,70
+		@ 14,30 SAY "Alta Duplicada"
+	ELSE
+		@  7,10 TO 15,70
+		@  8,20 SAY "Nombre:"
+		@  9,20 SAY "Apellidos:"
+		@ 10,20 SAY "Direccion:"
+		@ 11,20 SAY "Provincia:"
+		@ 12,20 SAY "Estado Civil:"
+		@ 13,20 SAY "Fecha Ingreso (dd/mm/aa):"
+		@ 14,20 SAY "Categoria Laboral (A,B,C,D):"
+
+		@  8,28 GET nom PICT "@!"
+		@  9,31 GET ape PICT "@!"
+		@ 10,31 GET dir PICT "@!"
+		READ
+		provincia()
+		xestado()
+		@ 13,46 GET fe  VALID fe <= DATE()
+		@ 14,49 GET cat PICT "!" VALID cat $ "ABCD"
+		READ
+		@ 17,10 TO 19,70
+		res = SPACE(1)
+		@ 18,20 SAY "Conforme con los datos (S/N): " ;
+			GET res PICT "!" VALID res $ "SN"
+		READ
+		IF res = "S"
+			APPEND BLANK
+			@  1, 1 SAY "es ANTES DEL REPLACE es"
+			@  1,25 SAY es
+
+			REPLACE dni       WITH dn        , ;
+					  nombre    WITH nom       , ;
+					  apellidos WITH ape       , ;
+					  direccion WITH dir       , ;
+					  estado    WITH STR(es,1) , ;
+					  provincia WITH op        , ;
+					  categoria WITH cat       , ;
+					  fecha     WITH fe
+		ENDIF
+	ENDIF
+
+	res = SPACE(1)
+	@ 20,10 TO 22,70
+	@ 21,30 SAY "Mas altas (S/N): " ;
+		GET res PICT "!" VALID res $ "SN"
+
+	READ
+ENDDO
+CLOSE DATABASE
+RETURN
+
+
+
+PROCEDURE provincia
+LOCAL pantalla
+LOCAL xpro := {"Alava", "Albacete", ;
+		   "Alicante", "Almeria", "Avila"}
+
+pantalla = SAVESCREEN(11,36,17,56)
+@ 11,36 CLEAR TO 17,56
+@ 11,36 TO 17,56
+DO WHILE op = 0
+	op = ACHOICE(12,38,17,54,xpro)
+ENDDO
+@ 11,36 CLEAR TO 17,56
+DISPBEGIN()
+RESTSCREEN(11,36,17,56,pantalla)
+DISPEND()
+@ 11,31 SAY xpro[op] COLOR "I"
+RETURN
+
+
+PROCEDURE xestado
+LOCAL pantalla
+LOCAL x_es := {"Soltero","Casado","Viudo"}
+
+pantalla = SAVESCREEN(12,36,16,47)
+@ 12,36 CLEAR TO 16,47
+@ 12,36 TO 16,47
+DO WHILE es = 0
+	es = ACHOICE(13,38,15,45,x_es)
+	@  1, 1 SAY "es en la funcion es"
+	@  1,22 SAY es
+ENDDO
+@ 12,36 CLEAR TO 16,47
+DISPBEGIN()
+RESTSCREEN(12,36,16,47,pantalla)
+DISPEND()
+@ 12,31 SAY x_es[es] COLOR "I"
+RETURN
+
